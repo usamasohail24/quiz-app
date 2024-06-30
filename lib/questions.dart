@@ -4,7 +4,9 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuesionsScreen extends StatefulWidget {
-  const QuesionsScreen({super.key});
+  const QuesionsScreen({super.key, required this.onSelectedAnswer});
+
+  final void Function(String answer) onSelectedAnswer;
 
   @override
   State<QuesionsScreen> createState() => _QuesionsScreenState();
@@ -14,8 +16,9 @@ class _QuesionsScreenState extends State<QuesionsScreen> {
 
   var questionIndex = 0;
 
-  void currentquestionIndex() // use to jump to next question
+  void currentquestionIndex(String selectedAnswers) // use to jump to next question
   {
+    widget.onSelectedAnswer(selectedAnswers);
     setState(() {
       questionIndex = questionIndex + 1;
     });
@@ -47,7 +50,11 @@ class _QuesionsScreenState extends State<QuesionsScreen> {
             {
               return Column(
                 children: [
-                  AnswerButton(answer, currentquestionIndex),
+                  AnswerButton(answer, ()
+                  {
+                    currentquestionIndex(answer);
+                  }
+                  ),
                   const SizedBox(height: 10), 
                   ],
                );
