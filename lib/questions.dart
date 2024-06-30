@@ -10,6 +10,7 @@ class QuesionsScreen extends StatefulWidget {
 }
 
 class _QuesionsScreenState extends State<QuesionsScreen> {
+  final currentQuestion = questions[0];
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,20 +18,23 @@ class _QuesionsScreenState extends State<QuesionsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Question 1',
-            style: TextStyle(
+          Text(
+            currentQuestion.text,
+            style: const TextStyle(
               color: Colors.amberAccent,
             ),
           ),
           const SizedBox(height: 30),
-          AnswerButton('Option 1', () {}),
-          const SizedBox(height: 10),
-          AnswerButton('Option 2', () {}),
-          const SizedBox(height: 10),
-          AnswerButton('Option 3', () {}),
-          const SizedBox(height: 10),
-          AnswerButton('Option 4', () {}),
+          ...currentQuestion.options.map((answer) {
+            return Column(
+              children: [
+                AnswerButton(answer, () {
+                 
+                }),
+              const SizedBox(height: 10), 
+              ],
+            );
+          }),
         ],
       ),
     );
