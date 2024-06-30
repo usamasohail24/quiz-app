@@ -10,6 +10,6 @@ class QuesionsScreen extends StatefulWidget {
 class _QuesionsScreenState extends State<QuesionsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Text('Quetions Screen');
   }
 }
